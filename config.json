@@ -4,5 +4,6 @@
 	"watchList":  ["The Waiting Game", "Your Mom's Porno", "Sit And Do Nothing", "Where I Wait For The World Fall To Shit", "Where A Dog Dies", "Russian Roulette", "How To Get A Life", "How To Get Away With Murder", "The Nintendo Switch Lite Plus XL Mini i"],
 	"watchCount": "9",
 	"repair": "0",
-	"cmd_kill": "0"
+	"cmd_kill": "0",
+	"ops": ["EXAMPLE#0000"]
 }
