@@ -1,7 +1,7 @@
 {
-  "name": "Rice Krispies Bot",
-  "version": "2.0.0",
-  "description": "A Bullshit Bot For A Bullshit Server",
+  "name": "KP9982's Custom Discord Bot",
+  "version": "2.0.1",
+  "description": "An Open-Source Basic Discord Bot",
   "main": "index.js",
   "author": "kittypickles9982",
   "license": "MIT",
