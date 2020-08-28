@@ -34,6 +34,8 @@ Kill : kills the bot if cmd_kill is set to 1
 
 play : chooses a random string from watchList to set as playing, add a number argument from 0 - watchCount to manually choose
 
+ops : shows the list of ops in config.json
+
 ## License
 
 [MIT License](https://github.com/kittypickles9982/Discord-Bot/blob/master/LICENSE)
