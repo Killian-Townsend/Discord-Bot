@@ -41,7 +41,7 @@ client.on('message', message => {
 	const timeTaken = Date.now() - message.createdTimestamp;
 	const comSend = Date.now();
 	
-	if (repair === 1) {message.channel.send('Sorry, the bot is down for repairs for the time being, please try again later!');}
+	if (repair === '1') {message.channel.send('Sorry, the bot is down for repairs for the time being, please try again later!');}
 	else {
 		try {	
 			const addons = [cmd_kill, watchList, watchCount, client];
