@@ -26,6 +26,8 @@ cmd_kill : allows the bot to be killed with the kill command by an op - values :
 
 ops : an array of strings with users allowed to kill the bot
 
+mod_ch : channel id for what channel to post bot updates in
+
 ## Commands
 
 User : returns the users ID and full name
