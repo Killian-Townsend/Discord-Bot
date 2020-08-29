@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const {prefix, token, watchList, watchCount, repair, cmd_kill} = require('./config.json');
+const {prefix, token, watchList, watchCount, repair, cmd_kill, ops, mod_ch} = require('./config.json');
 const curWatch = Math.floor(Math.random() * 6);
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -27,7 +27,7 @@ client.once('ready', () => {
 	client.user.setActivity(watch);
 	console.log('Bot Activity Set');
 	console.log('Bot Ready!');
-	client.channels.cache.get('673416942983315467').send('Bot Ready!');
+	client.channels.cache.get(mod_ch).send('Bot Ready!');
 	return (console.error);
 });
 
@@ -44,7 +44,7 @@ client.on('message', message => {
 	if (repair === '1') {message.channel.send('Sorry, the bot is down for repairs for the time being, please try again later!');}
 	else {
 		try {	
-			const addons = [cmd_kill, watchList, watchCount, client];
+			const addons = [cmd_kill, watchList, watchCount, client, ops];
 			client.commands.get(command).execute(message, args,addons);
 		} catch (error) {
 			message.channel.send(`Unknown Command, Try Using ${prefix}help`);
