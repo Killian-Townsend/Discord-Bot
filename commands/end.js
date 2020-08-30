@@ -1,5 +1,5 @@
 module.exports = {
-	name: 'kill',
+	name: 'end',
 	description: 'Terminates The Bot - Admin Only',
 	execute(message, args, addons) {
 		const cmd_kill = addons[0];
@@ -12,17 +12,17 @@ module.exports = {
 			
 			if (ls === true) {
 				message.channel.send('Terminating Bot...');
-				console.log('Kill Command Sent, Terminating Bot...'.brightYellow);
+				console.log('Kill Command Sent, Terminating Bot...');
 				setTimeout(function(){
 					process.exit();
 				}, 750);
 			
 			} else {
-				message.channel.send('You Are Not Allowed To Terminate The Bot');
+				return;
 			}
 		}
 		else {
-			message.channel.send('The Key cmd_kill May Be Incorrectly Set, Check config.json');
+			return;
 		}
 	},
 };
