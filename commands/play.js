@@ -16,7 +16,6 @@ module.exports = {
 		else if ((num > -1) && (num < watchCount)) {	
 			const watch = watchList[num];
 			client.user.setActivity(watch);
-			console.log(`Bot Activity is : Playing A Game ${watch}`);
 			message.channel.send(`Bot Activity is : Playing A Game ${watch}`);
 		}
 		else {
