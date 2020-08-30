@@ -4,9 +4,15 @@
 
 A custom Discord bot written in javascript
 
+## Notice
+
+This bot is customised for my discord server, so feel free to make the changes you want
+
 ## Libraries
 
 [Discord.js](https://www.npmjs.com/package/discord.js)
+
+[Colors](https://www.npmjs.com/package/colors)
 
 ## Help
 
@@ -27,6 +33,8 @@ cmd_kill : allows the bot to be killed with the kill command by an op - values :
 ops : an array of strings with users allowed to kill the bot
 
 mod_ch : channel id for what channel to post bot updates in
+
+cmd_ch : channel for bot commands, leave blank to use on any channel
 
 ## Commands
 
