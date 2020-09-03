@@ -1,11 +1,14 @@
 {
 	"prefix": "~",
-	"token": "INSERT_TOKEN_HERE",
-	"watchList":  ["The Waiting Game", "Your Mom's Porno", "Sit And Do Nothing", "Where I Wait For The World Fall To Shit", "Where A Dog Dies", "Russian Roulette", "How To Get A Life", "How To Get Away With Murder", "The Nintendo Switch Lite Plus XL Mini i"],
-	"watchCount": "9",
+	"token": "ADD_TOKEN_HERE",
+	"watchList":  ["WATCH 1", "WATCH 2", "WATCH3"],
+	"watchCount": "3",
 	"repair": "0",
-	"cmd_kill": "0",
-	"ops": ["EXAMPLE#0000"],
-	"mod_ch": "1234567890",
-	"cmd_ch": "1234567890"
+	"cmd_kill": "1",
+	"ops": ["OWNER#0000", "ADMIN#0000", "MOD#0000"],
+	"mod_ch": "000000000000000000",
+	"cmd_ch": "",
+	"welcome_ch": "",
+	"guild_id": "000000000000000000",
+	"member_cnt_ch": ""
 }
