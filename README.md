@@ -41,8 +41,7 @@ cmd_ch : channel for bot commands, leave blank to use on any channel
 
 welcome_ch : if set, will send a welcome/leave message
 
-guild_id : Guild ID for member counting - Only required if member_cnt_ch is set
-
+guild_id : Guild ID for member counting - required
 member_cnt_ch : If set, will set channel name to amount of member, updates every message sent
 
 welcome_msg : If set, will DM this message to new user
