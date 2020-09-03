@@ -49,7 +49,7 @@ welcome_msg : If set, will DM this message to new user
 
 server_name : Name of server to be used in different situations
 
-### Warning : Not setting, or setting certain option incorrectly, may result in the bot creating errors, or dying at startup 
+#### Warning : Not setting, or setting certain option incorrectly, may result in the bot creating errors, or dying at startup 
 
 ## Commands
 
