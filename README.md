@@ -14,6 +14,8 @@ This bot is customised for my discord server, so feel free to make the changes y
 
 [Colors](https://www.npmjs.com/package/colors)
 
+[Nodemon](https://www.npmjs.com/package/nodemon)
+
 Libraries are already included within [node_modules](https://github.com/kittypickles9982/Discord-Bot/tree/master/node_modules)
 
 
@@ -59,6 +61,8 @@ Kill : kills the bot if cmd_kill is set to 1
 play : chooses a random string from watchList to set as playing, add a number argument from 0 - watchCount to manually choose
 
 ops : shows the list of ops in config.json
+
+ban : bans the mentioned user, add text after to give reason
 
 ## License
 
