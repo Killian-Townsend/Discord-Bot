@@ -2,7 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const colors = require('colors');
 const client = new Discord.Client();
-const {prefix, token, watchList, watchCount, repair, cmd_kill, ops, mod_ch, cmd_ch, welcome_ch, guild_id, member_cnt_ch, welcome_msg} = require('./config.json');
+const {prefix, token, watchList, watchCount, repair, cmd_kill, ops, mod_ch, cmd_ch, welcome_ch, guild_id, member_cnt_ch, welcome_msg, server_name} = require('./config.json');
 const curWatch = Math.floor(Math.random() * 6);
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -31,7 +31,7 @@ client.once('ready', () => {
 		console.log('[SYS] Bot Activity Set'.brightMagenta);
 		console.log(`[SYS] cmd_ch : ${cmd_ch}`.brightMagenta);
 		console.log('[INFO] Bot Ready!'.brightGreen);
-		console.log('‎‎‎‎‎‎‎‎‏‏‎‎‏'.black);
+		console.log('‎‎‎‎‎‎‎‎‏‏‎            ‎‏'.black);
 		client.channels.cache.get(mod_ch).send('Bot Ready!');
 		return (console.error);
 	} catch (error) {
@@ -46,16 +46,15 @@ client.once('ready', () => {
 });	
 
 client.on ("guildMemberAdd", member => {
-	
 	try {
 		if (!welcome_msg == undefined) {
-			member.send(welcome_msg);
-		}
-		if (!welcome_ch == undefined) {
-			client.channels.cache.get(welcome_ch).send(`Hello **${member.user.username}**! Welcome to ${server_name}`);
-		}
+            		member.send(welcome_msg);
+            	}
+            	if (!welcome_ch == undefined) {
+            		client.channels.cache.get(welcome_ch).send(`Hello **${member.user.username}**! Welcome to ${server_name}`);
+            	}
 	} catch (error) {
-		console.log(`[ERROR] An Error Occured While Adding A Member : ${error}`.brightRed.bold);
+            	console.log(`[ERROR] An Error Occurred While Adding A Member : ${error}`.brightRed.bold);
 	}
 })
 
@@ -74,23 +73,24 @@ client.on("guildMemberRemove", member => {
 })
 
 client.on('message', message => {
+
     try {
 	    if (!member_cnt_ch == undefined) {
 	        try {
-    
+
 	            const members = client.guilds.cache.get(guild_id).memberCount - 8;
-    
+
 	            client.channels.cache.get(member_cnt_ch).setName(`Members : ${members}`);
-    
+
 	        } catch (error) {
 	        	console.log(`[ERROR] Member Update Error : ${error}`.red.bold);
 	        }
 	    }
-    
+
 	    if (!message.content.startsWith(prefix) || message.author.bot) return;
 	    if (message.channel.type === 'dm') return;
 	    if (cmd_ch == undefined || message.channel.id === cmd_ch) {
-        
+
 	    	const args = message.content.slice(prefix.length).trim().split(/ +/);
 		    const command = args.shift().toLowerCase();
 		
@@ -99,22 +99,26 @@ client.on('message', message => {
 	
 		    if (repair === '1') {message.channel.send('Sorry, the bot is down for repairs for the time being, please try again later!');}
 		    	else {
-		    		try {	
-			    		const addons = [cmd_kill, watchList, watchCount, client, ops, prefix, mod_ch];
+		    		try {
+			    		const addons = [cmd_kill, watchList, watchCount, client, ops, prefix, mod_ch, guild_id];
 			    		client.commands.get(command).execute(message, args,addons);
 			    	} catch (error) {
 			    		message.channel.send(`Unknown Command, Try Using ${prefix}help`);
 			    		console.log(`[WARNING] Unknown CMD or Broken CMD : ${error}`.yellow.bold);
 			    	}
-			    }	
+			    }
 		    try {
-		    	const dateObj = new Date(comSend); 
-		    	const hours = dateObj.getUTCHours() - 4; 
-		    	const minutes = dateObj.getUTCMinutes(); 
-		    	const seconds = dateObj.getUTCSeconds(); 
-		    	const comSendForm = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0'); 
-		    	const comTaken = Date.now() - comSend;
-		    	console.log(`[CMD] ${comSendForm}  |  Command Sent : ${command}  |  Latency : ${timeTaken}ms`.brightCyan);
+		        if (command === 'kill') {
+		        }
+		        else {
+		    	    const dateObj = new Date(comSend);
+		    	    const hours = dateObj.getUTCHours() - 4;
+		    	    const minutes = dateObj.getUTCMinutes();
+		    	    const seconds = dateObj.getUTCSeconds();
+		    	    const comSendForm = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+		    	    const comTaken = Date.now() - comSend;
+		    	    console.log(`[CMD] ${comSendForm}  |  Command Sent : ${command}  |  Latency : ${timeTaken}ms`.brightCyan);
+		    	}
 		    } catch (error) {
 		    	console.log(`[ERROR] Time Function Error : ${error}`.brightRed.bold);
 		    }
