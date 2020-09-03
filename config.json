@@ -10,5 +10,7 @@
 	"cmd_ch": "",
 	"welcome_ch": "",
 	"guild_id": "000000000000000000",
-	"member_cnt_ch": ""
+	"member_cnt_ch": "",
+	"welcome_msg": "",
+	"server_name": ""
 }
