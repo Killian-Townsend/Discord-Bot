@@ -2,7 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const colors = require('colors');
 const client = new Discord.Client();
-const {prefix, token, watchList, watchCount, repair, cmd_kill, ops, mod_ch, cmd_ch} = require('./config.json');
+const {prefix, token, watchList, watchCount, repair, cmd_kill, ops, mod_ch, cmd_ch, welcome_ch, guild_id, member_cnt_ch, welcome_msg} = require('./config.json');
 const curWatch = Math.floor(Math.random() * 6);
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -31,12 +31,16 @@ client.once('ready', () => {
 		console.log('[SYS] Bot Activity Set'.brightMagenta);
 		console.log(`[SYS] cmd_ch : ${cmd_ch}`.brightMagenta);
 		console.log('[INFO] Bot Ready!'.brightGreen);
-		console.log('‎‎‎‎‎‎‎‎‏‏‎            ‎‏'.black);
+		console.log('‎‎‎‎‎‎‎‎‏‏‎‎‏'.black);
 		client.channels.cache.get(mod_ch).send('Bot Ready!');
 		return (console.error);
 	} catch (error) {
-		console.log(`[FATAL] Loading Error : ${error}`.red.bold);
-		process.exit();
+		console.log(`[FATAL] Loading Error : ${error}`.black.bgBrightRed);
+		console.log(`[FATAL] Bot Will Not Load And Will Close In 10 Seconds`.black.bgBrightRed);
+		setTimeout(function(){
+			process.exit()
+		}, 10000);
+		
 	}
 	
 });	
@@ -44,41 +48,45 @@ client.once('ready', () => {
 client.on ("guildMemberAdd", member => {
 	
 	try {
-		if (member.user.id === '187355156793393152') {
-			try {
-				member.send(`${member.user.username}, you have been permanently banned from **Centripetal Force**. You may **not** appeal this ban.`);
-				setTimeout(function(){
-					member.ban();
-				}, 500);
-			} catch (error) {
-				console.log(`[ERROR] Error Banning Member : ${error}`.brightRed.bold);
-			}
-		
-		} else {
-	
-			try {
-				member.send(`Hello ${member.user.username}! Welcome to **Centripetal Force**! I am <@743834091333484625>, Centripetal Force's custom bot! Written by kittypickles9982! Make sure to read over the quick rules, roles, and punishments to see if this server is right for you! When you've made your decision, go ahead and react to Carl's message. You'll then gain access to the rest of the server! If you have *any* questions, feel free to DM an online mod, we'll probably get back to you soon! Hope to see you inside ${member.user.username}!`);
-				client.channels.cache.get('748907768492327018').send(`Welcome ${member.user.username}! Welcome to **Centripetal Force**`);
-			} catch (error) {
-				console.log(`[ERROR] Unable To DM Member ${member.user.username} : ${error}`.brightRed.bold);
-			}
+		if (!welcome_msg == undefined) {
+			member.send(welcome_msg);
+		}
+		if (!welcome_ch == undefined) {
+			client.channels.cache.get(welcome_ch).send(`Hello **${member.user.username}**! Welcome to ${server_name}`);
 		}
 	} catch (error) {
 		console.log(`[ERROR] An Error Occured While Adding A Member : ${error}`.brightRed.bold);
 	}
 })
 
-client.on('message', message => {
-	
+client.on("guildMemberRemove", member => {
+
 	try {
-	
-	const members = client.guilds.cache.get('748907767661592596').memberCount - 8;
-	
-	client.channels.cache.get('749276654165164073').setName(`Members : ${members}`);
-	
+		
+		client.channels.cache.get(welcome_ch).send(`Goodbye **${member.user.username}**! Hope to see you again!`);
+		
+		
 	} catch (error) {
-		console.log(`[ERROR] Member Update Error : ${error}`.red.bold);
+	
+		console.log(`[ERROR] Member ${member.user.username} Leave Error : ${error}`.brightRed.bold);
+	
 	}
+})
+
+client.on('message', message => {
+
+	if (!member_cnt_ch == undefined) {
+	    try {
+
+	        const members = client.guilds.cache.get(guild_id).memberCount - 8;
+
+	        client.channels.cache.get(member_cnt_ch).setName(`Members : ${members}`);
+
+	    } catch (error) {
+	    	console.log(`[ERROR] Member Update Error : ${error}`.red.bold);
+	    }
+	}
+
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 	if (message.channel.type === 'dm') return;
 	if (cmd_ch == undefined || message.channel.id === cmd_ch) {
@@ -92,7 +100,7 @@ client.on('message', message => {
 		if (repair === '1') {message.channel.send('Sorry, the bot is down for repairs for the time being, please try again later!');}
 			else {
 				try {	
-					const addons = [cmd_kill, watchList, watchCount, client, ops, prefix];
+					const addons = [cmd_kill, watchList, watchCount, client, ops, prefix, mod_ch];
 					client.commands.get(command).execute(message, args,addons);
 				} catch (error) {
 					message.channel.send(`Unknown Command, Try Using ${prefix}help`);
