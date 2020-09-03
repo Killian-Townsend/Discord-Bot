@@ -39,6 +39,12 @@ mod_ch : channel id for what channel to post bot updates in - required
 
 cmd_ch : channel for bot commands, leave blank to use on any channel
 
+welcome_ch : if set, will send a welcome/leave message
+
+guild_id : Guild ID for member counting - Only required if member_cnt_ch is set
+
+member_cnt_ch : If set, will set channel name to amount of member, updates every message sent
+
 ## Commands
 
 User : returns the users ID and full name
