@@ -31,7 +31,7 @@ watchCount : how many strings there are in watchList
 
 repair : disables the bot - values : 0 off, 1 on
 
-cmd_kill : allows the bot to be killed with the kill command by an op - values : 0 no, 1 yes.
+cmd_kill : allows the bot to be killed with the kill command by an op - values : 0 no, 1 yes
 
 ops : an array of strings with users allowed to kill the bot
 
@@ -44,6 +44,12 @@ welcome_ch : if set, will send a welcome/leave message
 guild_id : Guild ID for member counting - Only required if member_cnt_ch is set
 
 member_cnt_ch : If set, will set channel name to amount of member, updates every message sent
+
+welcome_msg : If set, will DM this message to new user
+
+server_name : Name of server to be used in different situations
+
+### Warning : Not setting, or setting certain option incorrectly, may result in the bot creating errors, or dying at startup 
 
 ## Commands
 
