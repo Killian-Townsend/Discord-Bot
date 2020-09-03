@@ -74,54 +74,56 @@ client.on("guildMemberRemove", member => {
 })
 
 client.on('message', message => {
-
-	if (!member_cnt_ch == undefined) {
-	    try {
-
-	        const members = client.guilds.cache.get(guild_id).memberCount - 8;
-
-	        client.channels.cache.get(member_cnt_ch).setName(`Members : ${members}`);
-
-	    } catch (error) {
-	    	console.log(`[ERROR] Member Update Error : ${error}`.red.bold);
+    try {
+	    if (!member_cnt_ch == undefined) {
+	        try {
+    
+	            const members = client.guilds.cache.get(guild_id).memberCount - 8;
+    
+	            client.channels.cache.get(member_cnt_ch).setName(`Members : ${members}`);
+    
+	        } catch (error) {
+	        	console.log(`[ERROR] Member Update Error : ${error}`.red.bold);
+	        }
 	    }
-	}
-
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-	if (message.channel.type === 'dm') return;
-	if (cmd_ch == undefined || message.channel.id === cmd_ch) {
-
-		const args = message.content.slice(prefix.length).trim().split(/ +/);
-		const command = args.shift().toLowerCase();
+    
+	    if (!message.content.startsWith(prefix) || message.author.bot) return;
+	    if (message.channel.type === 'dm') return;
+	    if (cmd_ch == undefined || message.channel.id === cmd_ch) {
+        
+	    	const args = message.content.slice(prefix.length).trim().split(/ +/);
+		    const command = args.shift().toLowerCase();
 		
-		const timeTaken = Date.now() - message.createdTimestamp;
-		const comSend = Date.now();
+		    const timeTaken = Date.now() - message.createdTimestamp;
+		    const comSend = Date.now();
 	
-		if (repair === '1') {message.channel.send('Sorry, the bot is down for repairs for the time being, please try again later!');}
-			else {
-				try {	
-					const addons = [cmd_kill, watchList, watchCount, client, ops, prefix, mod_ch];
-					client.commands.get(command).execute(message, args,addons);
-				} catch (error) {
-					message.channel.send(`Unknown Command, Try Using ${prefix}help`);
-					console.log(`[WARNING] Unknown CMD or Broken CMD : ${error}`.brightYellow.bold);
-				}
-			}	
-		try {
-			const dateObj = new Date(comSend); 
-			const hours = dateObj.getUTCHours() - 4; 
-			const minutes = dateObj.getUTCMinutes(); 
-			const seconds = dateObj.getUTCSeconds(); 
-			const comSendForm = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0'); 
-			const comTaken = Date.now() - comSend;
-			console.log(`[CMD] ${comSendForm}  |  Command Sent : ${command}  |  Latency : ${timeTaken}ms`.brightCyan);
-		} catch (error) {
-			console.log(`[ERROR] Time Function Error : ${error}`.brightRed.bold);
-		}
-	} else {
-		return;
-	}
-
+		    if (repair === '1') {message.channel.send('Sorry, the bot is down for repairs for the time being, please try again later!');}
+		    	else {
+		    		try {	
+			    		const addons = [cmd_kill, watchList, watchCount, client, ops, prefix, mod_ch];
+			    		client.commands.get(command).execute(message, args,addons);
+			    	} catch (error) {
+			    		message.channel.send(`Unknown Command, Try Using ${prefix}help`);
+			    		console.log(`[WARNING] Unknown CMD or Broken CMD : ${error}`.yellow.bold);
+			    	}
+			    }	
+		    try {
+		    	const dateObj = new Date(comSend); 
+		    	const hours = dateObj.getUTCHours() - 4; 
+		    	const minutes = dateObj.getUTCMinutes(); 
+		    	const seconds = dateObj.getUTCSeconds(); 
+		    	const comSendForm = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0'); 
+		    	const comTaken = Date.now() - comSend;
+		    	console.log(`[CMD] ${comSendForm}  |  Command Sent : ${command}  |  Latency : ${timeTaken}ms`.brightCyan);
+		    } catch (error) {
+		    	console.log(`[ERROR] Time Function Error : ${error}`.brightRed.bold);
+		    }
+	    } else {
+		    return;
+	    }
+    } catch (error) {
+        console.log(`[WARNING] Basic Command Error : ${error}`.yellow.bold)
+    }
 });
 
 client.login(token);
