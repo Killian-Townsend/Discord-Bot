@@ -14,8 +14,6 @@ This bot is customised for my discord server, so feel free to make the changes y
 
 [Colors](https://www.npmjs.com/package/colors)
 
-[Nodemon](https://www.npmjs.com/package/nodemon)
-
 Libraries are already included within [node_modules](https://github.com/kittypickles9982/Discord-Bot/tree/master/node_modules)
 
 
