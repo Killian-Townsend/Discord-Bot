@@ -2,7 +2,18 @@ module.exports = {
 	name: 'ping',
 	description: 'Replies With Bot Latency',
 	execute(message, args) {
-		const timeTaken = Date.now() - message.createdTimestamp;
-		message.channel.send(`\`\`\`Latency : ${timeTaken}ms\`\`\``);
+
+		message.channel.send(`\`\`Pinging\`\``).then(m =>{
+			
+			var ping = m.createdTimestamp - message.createdTimestamp;
+			
+			setTimeout(function(){m.edit(`\`\`Pinging\`\``) }, 500);
+			setTimeout(function(){m.edit(`\`\`Pinging.\`\``) }, 1000);
+			setTimeout(function(){m.edit(`\`\`Pinging..\`\``) }, 1500);
+			setTimeout(function(){m.edit(`\`\`Pinging...\`\``) }, 2000);
+			setTimeout(function(){m.edit(`\`\`Ping: ${ping}ms\`\``) }, 2500);
+			
+		});
+		
 	},
 };
