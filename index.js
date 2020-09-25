@@ -46,15 +46,31 @@ client.once('ready', () => {
 });	
 
 client.on ("guildMemberAdd", member => {
+	
 	try {
-		if (!welcome_msg == undefined) {
-            		member.send(welcome_msg);
-            	}
-            	if (!welcome_ch == undefined) {
-            		client.channels.cache.get(welcome_ch).send(`Hello **${member.user.username}**! Welcome to ${server_name}`);
-            	}
+		if (member.user.id === '187355156793393152') {
+			try {
+				member.send(`${member.user.username}, you have been permanently banned from **Centripetal Force**. You may **not** appeal this ban.\n\nLeave me alone. I don\'t want anything to do with you`);
+				setTimeout(function(){
+					member.ban();
+				}, 500);
+			} catch (error) {
+				console.log(`[ERROR] Error Banning Member : ${error}`.brightRed.bold);
+			}
+		
+		} else {
+	
+			try {
+				member.send(`Hello ${member.user.username}! Welcome to **Centripetal Force**! I am <@743834091333484625>, Centripetal Force's custom bot! Written by kittypickles9982! Make sure to read over the quick rules, roles, and punishments to see if this server is right for you! When you've made your decision, go ahead and react to Carl's message. You'll then gain access to the rest of the server! If you have *any* questions, feel free to DM an online mod, we'll probably get back to you soon! Hope to see you inside ${member.user.username}!`);
+				
+				client.channels.cache.get(welcome_ch).send(`Hello **${member.user.username}**! Welcome to Centripetal Force`);
+				
+			} catch (error) {
+				console.log(`[ERROR] User ${member.user.username} Join Error : ${error}`.brightRed.bold);
+			}
+		}
 	} catch (error) {
-            	console.log(`[ERROR] An Error Occurred While Adding A Member : ${error}`.brightRed.bold);
+		console.log(`[ERROR] An Error Occurred While Adding A Member : ${error}`.brightRed.bold);
 	}
 })
 
@@ -92,15 +108,13 @@ client.on('message', message => {
 	    if (cmd_ch == undefined || message.channel.id === cmd_ch) {
 
 	    	const args = message.content.slice(prefix.length).trim().split(/ +/);
-		    const command = args.shift().toLowerCase();
+		const command = args.shift().toLowerCase();
 		
-		    const timeTaken = Date.now() - message.createdTimestamp;
-		    const comSend = Date.now();
-	
+		
 		    if (repair === '1') {message.channel.send('Sorry, the bot is down for repairs for the time being, please try again later!');}
 		    	else {
 		    		try {
-			    		const addons = [cmd_kill, watchList, watchCount, client, ops, prefix, mod_ch, guild_id];
+			    		const addons = [cmd_kill, watchList, watchCount, client, ops, prefix, mod_ch, guild_id, server_name];
 			    		client.commands.get(command).execute(message, args,addons);
 			    	} catch (error) {
 			    		message.channel.send(`Unknown Command, Try Using ${prefix}help`);
@@ -108,17 +122,14 @@ client.on('message', message => {
 			    	}
 			    }
 		    try {
-		        if (command === 'kill') {
-		        }
-		        else {
-		    	    const dateObj = new Date(comSend);
-		    	    const hours = dateObj.getUTCHours() - 4;
-		    	    const minutes = dateObj.getUTCMinutes();
-		    	    const seconds = dateObj.getUTCSeconds();
-		    	    const comSendForm = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
-		    	    const comTaken = Date.now() - comSend;
-		    	    console.log(`[CMD] ${comSendForm}  |  Command Sent : ${command}  |  Latency : ${timeTaken}ms`.brightCyan);
-		    	}
+			var now = Date.now();
+		    	const dateObj = new Date(now);
+		    	const hours = dateObj.getUTCHours() - 4;
+		    	const minutes = dateObj.getUTCMinutes();
+		    	const seconds = dateObj.getUTCSeconds();
+		    	const comSendForm = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+		   	console.log(`[CMD] ${comSendForm}  |  Command Sent : ${command}`.brightCyan);
+			
 		    } catch (error) {
 		    	console.log(`[ERROR] Time Function Error : ${error}`.brightRed.bold);
 		    }
